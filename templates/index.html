@@ -1,0 +1,31 @@
+<!doctype html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h3>Task 1</h3>
+    <form enctype="multipart/form-data" action="{{ url_for('first_task') }}" method="post">
+      <label>Image</label>
+      <input type="file" name="file">
+      <input type="submit">
+    </form>
+  <h3>Task 2</h3>
+    <form enctype="multipart/form-data" action="{{ url_for('second_task') }}" method="post">
+      <label>Image 1</label>
+      <input type="file" name="first_file">
+      <label>Image 2</label>
+      <input type="file" name="second_file">
+      <input type="submit">
+    </form>
+  <div class="parent">
+    {% for first_image, second_image in output_images %}
+      <div class="child">
+        <img src="data:image/png;base64, {{ first_image }}" alt="First">
+      </div>
+      <div class="child">
+        <img src="data:image/png;base64, {{ second_image }}" alt="Second">
+      </div>
+    {% endfor %}
+  </div>
+</body>
